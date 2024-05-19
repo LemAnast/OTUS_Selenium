@@ -12,6 +12,9 @@ class AdminPage(BasePage):
     INPUT_LABEL = By.CSS_SELECTOR, ".mb-3 label"
     INPUT_ICON = By.CSS_SELECTOR, ".mb-3 i"
     LOGIN_BTN = By.CSS_SELECTOR, "button[type='submit']"
+    LOGIN_INPUT = By.ID, "input-username"
+    PASS_INPUT = By.ID, "input-password"
+    LOGOUT_BTN = By.ID, "nav-logout"
 
     def open_admin_page(self):
         self.open_page(self.PATH)
@@ -59,4 +62,24 @@ class AdminPage(BasePage):
 
     def submit_login_button(self):
         self.get_element(self.LOGIN_BTN).click()
+        return self
+
+    def login(self):
+        self.input_value(self.LOGIN_INPUT, "user")
+        self.input_value(self.PASS_INPUT, "bitnami")
+        self.click(self.LOGIN_BTN)
+        return self
+
+    def wait_logged_in(self):
+        self.wait_url("/administration/index.php?route=common/dashboard&user_token")
+        self.check_title_text("Dashboard")
+        return self
+
+    def logout(self):
+        self.click(self.LOGOUT_BTN)
+        return self
+
+    def wait_logged_out(self):
+        self.wait_url("/administration/index.php?route=common/login")
+        self.check_title_text("Administration")
         return self

@@ -15,7 +15,7 @@ class BasePage:
         return WebDriverWait(self.browser, timeout).until(EC.title_is(title))
 
     def wait_url(self, page_url: str, timeout=3):
-        return WebDriverWait(self.browser, timeout).until(EC.url_to_be(self.browser.url + page_url))
+        return WebDriverWait(self.browser, timeout).until(EC.url_contains(self.browser.url + page_url))
 
     def get_element(self, locator: tuple, timeout=3):
         return WebDriverWait(self.browser, timeout).until(EC.visibility_of_element_located(locator))

@@ -1,4 +1,7 @@
+import random
+
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains as AC
 
 from page_objects.base_page import BasePage
 
@@ -13,6 +16,8 @@ class MainPage(BasePage):
     PRODUCT_ITEM = By.CLASS_NAME, "product-thumb"
     PRODUCT_BTN = By.CSS_SELECTOR, "button[type='submit']"
     FEATURED_PRODUCT_NAME = By.CSS_SELECTOR, ".product-thumb h4 a"
+    ADD_TO_CART_BTN = By.CSS_SELECTOR, "button[type='submit']:nth-of-type(1)"
+    SHOPPING_CART = By.CSS_SELECTOR, "a[title='Shopping Cart']"
 
     def click_currency_dropdown(self):
         self.get_element(self.CURRENCY_DD).click()
@@ -54,4 +59,16 @@ class MainPage(BasePage):
             self.click(self.FEATURED_PRODUCT_NAME)
         else:
             self.get_elements(self.FEATURED_PRODUCT_NAME)[index].click()
-        return  self
+        return self
+
+    def add_to_cart_random_product(self):
+        product_items = self.get_elements(self.PRODUCT_ITEM)
+        i = random.randint(1, len(product_items))
+        target_btn = self.get_element((By.CSS_SELECTOR,
+                                       f"div.col.mb-3:nth-child({i}) button[type='submit']:nth-child(1)"))
+        AC(self.browser).move_to_element(target_btn).click(target_btn).perform()
+        return self
+
+    def click_shopping_cart_link(self):
+        self.click(self.SHOPPING_CART)
+        return self
