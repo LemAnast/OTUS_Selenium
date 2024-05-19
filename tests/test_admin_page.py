@@ -1,5 +1,4 @@
 from page_objects.admin_page import AdminPage
-from page_objects.alert_danger_element import AlertDangerElement
 
 
 def test_admin_page_header(browser):
