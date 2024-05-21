@@ -7,8 +7,6 @@ from page_objects.base_page import BasePage
 
 
 class MainPage(BasePage):
-    CURRENCY_DD = By.ID, "form-currency"
-    CURRENCY_ITEM = By.CSS_SELECTOR, "#form-currency li"
     CART_DD = By.ID, "header-cart"
     CART_DD_TEXT = By.CSS_SELECTOR, "#header-cart li"
     CAROUSEL = By.CLASS_NAME, "carousel.slide"
@@ -17,17 +15,8 @@ class MainPage(BasePage):
     PRODUCT_BTN = By.CSS_SELECTOR, "button[type='submit']"
     FEATURED_PRODUCT_NAME = By.CSS_SELECTOR, ".product-thumb h4 a"
     ADD_TO_CART_BTN = By.CSS_SELECTOR, "button[type='submit']:nth-of-type(1)"
-    SHOPPING_CART = By.CSS_SELECTOR, "a[title='Shopping Cart']"
-
-    def click_currency_dropdown(self):
-        self.get_element(self.CURRENCY_DD).click()
-        return self
-
-    def check_currency_list(self):
-        currency_list = self.get_elements(self.CURRENCY_ITEM)
-        assert len(currency_list) == 3, \
-            "Количество валют в дропдауне не равно 3"
-        return self
+    PRODUCT_PRICE_NEW = By.CLASS_NAME, "price-new"
+    PRODUCT_PRICE_TAX = By.CLASS_NAME, "price-tax"
 
     def click_cart_dropdown(self):
         self.get_element(self.CART_DD).click()
@@ -69,6 +58,29 @@ class MainPage(BasePage):
         AC(self.browser).move_to_element(target_btn).click(target_btn).perform()
         return self
 
-    def click_shopping_cart_link(self):
-        self.click(self.SHOPPING_CART)
+    def check_prices_in_euro(self):
+        product_items = self.get_elements(self.PRODUCT_ITEM)
+        for i in range(0, len(product_items)):
+            assert "€" in product_items[i].find_element(*self.PRODUCT_PRICE_NEW).text, \
+                "Цена в евро отображается некорректно"
+            assert "€" in product_items[i].find_element(*self.PRODUCT_PRICE_TAX).text, \
+                "Налог цены в евро отображается некорректно"
+        return self
+
+    def check_prices_in_pound(self):
+        product_items = self.get_elements(self.PRODUCT_ITEM)
+        for i in range(0, len(product_items)):
+            assert "£" in product_items[i].find_element(*self.PRODUCT_PRICE_NEW).text, \
+                "Цена в фунтах отображается некорректно"
+            assert "£" in product_items[i].find_element(*self.PRODUCT_PRICE_TAX).text, \
+                "Налог цены в фунтах отображается некорректно"
+        return self
+
+    def check_prices_in_dollar(self):
+        product_items = self.get_elements(self.PRODUCT_ITEM)
+        for i in range(0, len(product_items)):
+            assert "$" in product_items[i].find_element(*self.PRODUCT_PRICE_NEW).text, \
+                "Цена в долларах отображается некорректно"
+            assert "$" in product_items[i].find_element(*self.PRODUCT_PRICE_TAX).text, \
+                "Налог цены в долларах отображается некорректно"
         return self

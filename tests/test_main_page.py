@@ -1,8 +1,9 @@
 from page_objects.main_page import MainPage
+from page_objects.top_menu_element import TopMenu
 
 
 def test_main_page_currency(browser):
-    MainPage(browser) \
+    TopMenu(browser) \
         .click_currency_dropdown() \
         .check_currency_list()
 
