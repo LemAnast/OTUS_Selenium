@@ -15,6 +15,11 @@ class RegisterPage(BasePage):
     PASS_INPUT = By.ID, "input-password"
     SUBMIT_BTN = By.CSS_SELECTOR, "button[type='submit']"
     PASS_VALID = By.ID, "error-password"
+    FIRST_NAME_INPUT = By.ID, "input-firstname"
+    LAST_NAME_INPUT = By.ID, "input-lastname"
+    EMAIL_INPUT = By.ID, "input-email"
+    CBOX_AGREEMENT = By.CSS_SELECTOR, "input[name='agree']"
+    H1_SUCCESS_REG = By.CSS_SELECTOR, "#content h1"
 
     def open_register_page(self):
         self.open_page(self.PATH)
@@ -36,7 +41,7 @@ class RegisterPage(BasePage):
         return self
 
     def click_newsletter_checkbox(self):
-        self.get_element(self.CBOX_NL).click()
+        self.click(self.CBOX_NL)
         return self
 
     def check_active_newsletter_checkbox(self):
@@ -51,7 +56,7 @@ class RegisterPage(BasePage):
         return self
 
     def click_link_to_login_page(self):
-        self.get_element(self.LOGIN_LINK).click()
+        self.click(self.LOGIN_LINK)
         return self
 
     def enter_invalid_password(self):
@@ -59,10 +64,29 @@ class RegisterPage(BasePage):
         return self
 
     def click_submit_button(self):
-        self.get_element(self.SUBMIT_BTN).click()
+        self.click(self.SUBMIT_BTN)
         return self
 
     def check_password_validation(self):
         assert self.get_element(self.PASS_VALID).text == "Password must be between 4 and 20 characters!", \
             "Текст валидации пароля не верен"
         return self
+
+    def fill_your_personal_details_inputs(self):
+        self.input_value(self.FIRST_NAME_INPUT, "Will")
+        self.input_value(self.LAST_NAME_INPUT, "Smith")
+        self.input_value(self.EMAIL_INPUT, "Smith123@mail.com")
+        return self
+
+    def enter_valid_password(self):
+        self.input_value(self.PASS_INPUT, "123Smith")
+        return self
+
+    def click_agreement_checkbox(self):
+        self.click(self.CBOX_AGREEMENT)
+        return self
+
+    def wait_success_registration(self):
+        self.wait_url("/en-gb?route=account/success&customer_token")
+        self.check_title_text("Your Account Has Been Created!")
+        assert self.get_element(self.H1_SUCCESS_REG).text == "Your Account Has Been Created!"

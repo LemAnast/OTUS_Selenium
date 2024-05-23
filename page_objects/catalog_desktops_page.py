@@ -44,7 +44,7 @@ class CatalogDesktopsPage(BasePage):
         return self
 
     def activate_list_view(self):
-        self.get_element(self.BUTTON_LIST).click()
+        self.click(self.BUTTON_LIST)
         return self
 
     def check_list_view(self):

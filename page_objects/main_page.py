@@ -19,7 +19,7 @@ class MainPage(BasePage):
     PRODUCT_PRICE_TAX = By.CLASS_NAME, "price-tax"
 
     def click_cart_dropdown(self):
-        self.get_element(self.CART_DD).click()
+        self.click(self.CART_DD)
         return self
 
     def check_empty_cart_dropdown_text(self):

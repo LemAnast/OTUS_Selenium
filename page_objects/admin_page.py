@@ -61,7 +61,7 @@ class AdminPage(BasePage):
         return self
 
     def submit_login_button(self):
-        self.get_element(self.LOGIN_BTN).click()
+        self.click(self.LOGIN_BTN)
         return self
 
     def login(self):

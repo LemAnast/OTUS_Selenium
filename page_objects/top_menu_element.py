@@ -23,7 +23,7 @@ class TopMenu:
         return self
 
     def check_currency_list(self):
-        currency_list = self.browser.find_element(*self.CURRENCY_ITEM)
+        currency_list = self.browser.find_elements(*self.CURRENCY_ITEM)
         assert len(currency_list) == 3, \
             "Количество валют в дропдауне не равно 3"
         return self

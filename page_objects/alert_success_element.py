@@ -21,3 +21,7 @@ class AlertSuccessElement:
         self.browser.find_element(*self.CLOSE_BTN).click()
         return self
 
+    def check_alert_success_modified_product(self):
+        assert "Success: You have modified products!" in self.alert.text, \
+            "Текст оповещения некорректный"
+        return self
