@@ -1,4 +1,4 @@
-import time
+import allure
 
 from page_objects.add_product_page import AddProductPage
 from page_objects.admin_page import AdminPage
@@ -11,6 +11,8 @@ from page_objects.shopping_cart_page import ShoppingCartPage
 from page_objects.top_menu_element import TopMenu
 
 
+@allure.feature("Admin page")
+@allure.title("Проверка логина и разлогина в админ панель")
 def test_login_and_logout_to_admin_page(browser):
     AdminPage(browser) \
         .open_admin_page() \
@@ -20,6 +22,8 @@ def test_login_and_logout_to_admin_page(browser):
         .wait_logged_out()
 
 
+@allure.feature("Main page")
+@allure.title("Проверка добавления в корзину случайного товара с главной страницы")
 def test_add_to_cart_random_product(browser):
     MainPage(browser).add_to_cart_random_product()
     AlertSuccessElement(browser) \
@@ -30,6 +34,8 @@ def test_add_to_cart_random_product(browser):
     ShoppingCartPage(browser).check_product_in_cart()
 
 
+@allure.feature("Main page")
+@allure.title("Проверка, что при переключении валют цены на товары меняются на главной странице")
 def test_main_page_switch_currencies(browser):
     TopMenu(browser) \
         .click_currency_dropdown() \
@@ -48,6 +54,8 @@ def test_main_page_switch_currencies(browser):
         .check_prices_in_dollar()
 
 
+@allure.feature("Catalog page")
+@allure.title("Проверка, что при переключении валют цены на товары меняются в каталоге")
 def test_catalog_page_switch_currencies(browser):
     CatalogDesktopsPage(browser) \
         .open_catalog_desktops_page()
@@ -68,6 +76,8 @@ def test_catalog_page_switch_currencies(browser):
         .check_prices_in_dollar()
 
 
+@allure.feature("Admin page")
+@allure.title("Проверка добавления нового товара в разделе администратора")
 def test_add_new_product_admin_page(browser):
     AdminPage(browser) \
         .open_admin_page() \
@@ -87,6 +97,8 @@ def test_add_new_product_admin_page(browser):
     AlertSuccessElement(browser).check_alert_success_modified_product()
 
 
+@allure.feature("Admin page")
+@allure.title("Проверка удаления товара в разделе администратора")
 def test_delete_product_admin_page(browser):
     AdminPage(browser) \
         .open_admin_page() \
@@ -102,6 +114,8 @@ def test_delete_product_admin_page(browser):
     AlertSuccessElement(browser).check_alert_success_modified_product()
 
 
+@allure.feature("Registration page")
+@allure.title("Проверка регистрации нового пользователя")
 def test_registration_user(browser):
     RegisterPage(browser) \
         .open_register_page() \
@@ -112,6 +126,8 @@ def test_registration_user(browser):
         .wait_success_registration()
 
 
+@allure.feature("Main page")
+@allure.title("Проверка переключения валют из верхнего меню")
 def test_switching_currencies(browser):
     TopMenu(browser) \
         .click_currency_dropdown() \
