@@ -33,7 +33,7 @@ def pytest_addoption(parser):
         "--yabinary", action="store_true",
         default="C:/Users/79515/AppData/Local/Yandex/YandexBrowser/Application/browser.exe"
     )
-    parser.addoption("--url", action="store", default="http://192.168.0.102:8081")
+    parser.addoption("--url", action="store", default="http://192.168.0.108:8081")
     parser.addoption("--log_level", action="store", default="INFO")
 
 
