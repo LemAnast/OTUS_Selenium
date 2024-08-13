@@ -21,7 +21,7 @@ def pytest_addoption(parser):
     )
     parser.addoption("--bv_remote", action="store", default="125.0")
     parser.addoption("--vnc", action="store_true")
-    parser.addoption("--executor", action="store", default="127.0.0.1")
+    parser.addoption("--executor", action="store", default="172.20.0.2")
     parser.addoption(
         "--headless", action="store_true"
     )
@@ -33,7 +33,7 @@ def pytest_addoption(parser):
         "--yabinary", action="store_true",
         default="C:/Users/79515/AppData/Local/Yandex/YandexBrowser/Application/browser.exe"
     )
-    parser.addoption("--url", action="store", default="http://192.168.0.108:8081")
+    parser.addoption("--url", action="store", default="http://opencart:8080")
     parser.addoption("--log_level", action="store", default="INFO")
 
 
