@@ -53,7 +53,7 @@ services:
       - opencart
     networks:
       - selenoid
-    command: ./wait-for-it.sh opencart 8080 -- pytest -v /tests --launch_mode remote
+    command: ./wait-for-it.sh opencart 8080 pytest -v /tests --launch_mode remote
     container_name: opencart_tests_container
 
 networks:
