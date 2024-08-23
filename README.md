@@ -21,3 +21,11 @@
 5) ДЗ Dockerfile  
 В корень проекта добавлен Dockerfile
 Также для восстановления работоспособности запуска тестов локально, актуализирован IP адрес в conftest и явно прописана версия используемой библиотеки faker в requirements
+
+6) ДЗ docker-compose
+В корень проекта добавлен docker-compose файл для запуска окружения opencart и тестов в нем. Dockerfile перенесен в папку tests.
+Сборка образа opencart-tests с помощью команды:  
+docker build -f tests/Dockerfile -t opencart-tests .  
+  
+Запуск окружения и тестов:  
+docker-compose -f docker-compose.yml up  
